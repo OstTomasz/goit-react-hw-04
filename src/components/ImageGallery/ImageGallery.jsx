@@ -3,26 +3,35 @@ import axios from "axios";
 
 import css from "./ImageGallery.module.css";
 
+import { Loader } from "../Loader/Loader";
+
 const APIKEY = "S9B4Xc46HDCuoMTyqKnfQ6wPMSxgCiQjz9AMPlSbrsI";
 const APIURL = `https://api.unsplash.com/photos/?client_id=${APIKEY}`;
 
 export const ImageGallery = () => {
   const [gallery, setGallery] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getImgs = async () => {
-      const response = await axios.get(APIURL);
-      setGallery(response.data);
+      try {
+        setIsLoading(true);
+        const response = await axios.get(APIURL);
+        setGallery(response.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     getImgs();
   }, []);
 
-  return (
+  return !isLoading ? (
+    <Loader />
+  ) : (
     <ul className={css.gallery}>
       {gallery.map((img) => (
-        // {
-        //   console.log("img:", img);
-        // }
         <li key={img.id}>
           <img
             src={img.urls.small}
