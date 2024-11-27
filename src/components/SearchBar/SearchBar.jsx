@@ -8,7 +8,7 @@ export const SearchBar = () => {
       <div>
         <Toaster />
       </div>
-      {/* add toast */}
+      {/* add toast  toast("Hello World")*/}
       <form className={css.form}>
         <button className={css.button} type="submit">
           <CiSearch size={20} />
