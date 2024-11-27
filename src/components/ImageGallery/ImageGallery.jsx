@@ -4,6 +4,8 @@ import axios from "axios";
 import css from "./ImageGallery.module.css";
 
 import { Loader } from "../Loader/Loader";
+import { ImageCard } from "../ImageCard/ImageCard";
+import { LoadMoreBtn } from "../LoadMoreBtn/LoadMoreBtn";
 
 const APIKEY = "S9B4Xc46HDCuoMTyqKnfQ6wPMSxgCiQjz9AMPlSbrsI";
 const APIURL = `https://api.unsplash.com/photos/?client_id=${APIKEY}`;
@@ -27,20 +29,20 @@ export const ImageGallery = () => {
     getImgs();
   }, []);
 
-  return !isLoading ? (
+  return isLoading ? (
     <Loader />
   ) : (
-    <ul className={css.gallery}>
-      {gallery.map((img) => (
-        <li key={img.id}>
-          <img
+    <>
+      <ul className={css.gallery}>
+        {gallery.map((img) => (
+          <ImageCard
+            key={img.id}
             src={img.urls.small}
             alt={img.alt_description}
-            height={300}
-            width={350}
           />
-        </li>
-      ))}
-    </ul>
+        ))}
+      </ul>
+      <LoadMoreBtn />
+    </>
   );
 };
