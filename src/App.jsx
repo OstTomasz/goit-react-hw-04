@@ -15,10 +15,11 @@ export const App = () => {
   if (isLoading) {
     return <Loader />;
   }
+  console.log(gallery);
   return (
     <>
       <SearchBar getImgs={getImgs} />
-      <ImageGallery gallery={gallery} />
+      <ImageGallery />
       {gallery.length > 0 ? <LoadMoreBtn /> : null}
     </>
   );

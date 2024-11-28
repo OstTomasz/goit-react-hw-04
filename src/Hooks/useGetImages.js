@@ -15,7 +15,6 @@ export const useGetImages = () => {
       setError(error);
     } finally {
       setIsLoading(false);
-      console.log(gallery);
     }
   };
 
