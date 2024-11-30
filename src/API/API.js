@@ -8,6 +8,5 @@ export const fetchPhotos = async (query, page = 1) => {
   const response = await axios.get(
     `/photos/?client_id=${APIKEY}&page=${page}&query=${query}`
   );
-
   return response.data.results;
 };

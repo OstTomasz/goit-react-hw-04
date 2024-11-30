@@ -14,7 +14,11 @@ export const App = () => {
       <SearchBar getImgs={getImgs} />
       {error ? <ErrorMessage /> : <ImageGallery gallery={gallery} />}
       {isLoading ? <Loader /> : null}
-      {gallery.length > 0 ? <LoadMoreBtn getMoreImg={getMoreImg} /> : null}
+      {gallery.length > 0 ? (
+        <LoadMoreBtn getMoreImg={getMoreImg} />
+      ) : error ? (
+        <ErrorMessage />
+      ) : null}
     </>
   );
 };
