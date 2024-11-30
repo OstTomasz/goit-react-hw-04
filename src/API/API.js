@@ -4,9 +4,7 @@ const APIKEY = "S9B4Xc46HDCuoMTyqKnfQ6wPMSxgCiQjz9AMPlSbrsI";
 
 axios.defaults.baseURL = `https://api.unsplash.com/search`;
 
-let page = 1;
-
-export const fetchPhotos = async (query) => {
+export const fetchPhotos = async (query, page = 1) => {
   const response = await axios.get(
     `/photos/?client_id=${APIKEY}&page=${page}&query=${query}`
   );

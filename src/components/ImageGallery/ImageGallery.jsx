@@ -1,11 +1,8 @@
 import css from "./ImageGallery.module.css";
 
 import { ImageCard } from "../ImageCard/ImageCard";
-import { useGetImages } from "../../Hooks/useGetImages";
 
-export const ImageGallery = () => {
-  const { gallery } = useGetImages();
-  console.log(gallery);
+export const ImageGallery = ({ gallery }) => {
   return gallery.length > 0 ? (
     <>
       <ul className={css.gallery}>

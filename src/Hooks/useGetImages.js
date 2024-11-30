@@ -18,10 +18,23 @@ export const useGetImages = () => {
     }
   };
 
+  const getMoreImg = async (query, page) => {
+    try {
+      setIsLoading(true);
+      const photos = await fetchPhotos(query, page);
+      setGallery((prev) => [...prev, photos]);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     gallery,
     isLoading,
     error,
     getImgs,
+    getMoreImg,
   };
 };

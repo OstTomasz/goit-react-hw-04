@@ -7,20 +7,14 @@ import { ImageGallery } from "./components/ImageGallery/ImageGallery";
 import { LoadMoreBtn } from "./components/LoadMoreBtn/LoadMoreBtn";
 
 export const App = () => {
-  const { gallery, isLoading, error, getImgs } = useGetImages();
+  const { gallery, isLoading, error, getImgs, getMoreImg } = useGetImages();
 
-  if (error) {
-    return <ErrorMessage />;
-  }
-  if (isLoading) {
-    return <Loader />;
-  }
-  console.log(gallery);
   return (
     <>
       <SearchBar getImgs={getImgs} />
-      <ImageGallery />
-      {gallery.length > 0 ? <LoadMoreBtn /> : null}
+      {error ? <ErrorMessage /> : <ImageGallery gallery={gallery} />}
+      {isLoading ? <Loader /> : null}
+      {gallery.length > 0 ? <LoadMoreBtn getMoreImg={getMoreImg} /> : null}
     </>
   );
 };

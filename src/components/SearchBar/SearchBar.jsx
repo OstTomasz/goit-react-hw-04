@@ -9,8 +9,7 @@ export const SearchBar = ({ getImgs }) => {
     search.value === ""
       ? toast.error("Please enter searching phase!")
       : getImgs(search.value);
-
-    console.log(search.value);
+    search.value = "";
   };
   return (
     <header className={css.header}>
