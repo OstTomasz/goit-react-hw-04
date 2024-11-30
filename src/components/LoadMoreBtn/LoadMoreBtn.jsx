@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import css from "./LoadMoreBtn.module.css";
+import { queryContext } from "../../providers/ContextProvider";
+import { scrollToBottom } from "../../Hooks/useGetImages";
 
 export const LoadMoreBtn = ({ getMoreImg }) => {
+  const { searchQuery } = useContext(queryContext);
   const [page, setPage] = useState(2);
   const handleClick = () => {
     setPage((prev) => prev + 1);
-    getMoreImg(page);
+    getMoreImg(searchQuery, page).then(scrollToBottom);
   };
 
   return (

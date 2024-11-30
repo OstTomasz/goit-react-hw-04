@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { fetchPhotos } from "../API/API";
 
+export const scrollToBottom = () =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(scrollBy(0, document.body.scrollHeight, { behavior: "smooth" }));
+    }, 0);
+  });
+
 export const useGetImages = () => {
   const [gallery, setGallery] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +29,7 @@ export const useGetImages = () => {
     try {
       setIsLoading(true);
       const photos = await fetchPhotos(query, page);
-      setGallery((prev) => [...prev, photos]);
+      setGallery((prev) => [...prev, ...photos]);
     } catch (error) {
       setError(error);
     } finally {

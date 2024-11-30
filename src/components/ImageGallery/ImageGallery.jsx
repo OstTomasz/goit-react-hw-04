@@ -1,17 +1,26 @@
 import css from "./ImageGallery.module.css";
 
 import { ImageCard } from "../ImageCard/ImageCard";
+import { useContext } from "react";
+import { imageContext } from "../../providers/ImageProvider";
 
-export const ImageGallery = ({ gallery }) => {
+export const ImageGallery = ({ gallery, openModal }) => {
+  const { setImage } = useContext(imageContext);
+
   return gallery.length > 0 ? (
     <>
       <ul className={css.gallery}>
         {gallery.map((img) => (
-          <ImageCard
+          <li
             key={img.id}
-            src={img.urls.small}
-            alt={img.alt_description}
-          />
+            className={css.item}
+            onClick={() => {
+              openModal();
+              setImage(img.urls.regular);
+            }}
+          >
+            <ImageCard src={img.urls.small} alt={img.alt_description} />
+          </li>
         ))}
       </ul>
     </>
